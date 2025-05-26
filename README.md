@@ -101,15 +101,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Screenshots
 
 1. Register
-image.png
+![image](https://github.com/user-attachments/assets/f4877022-66df-482f-a11e-bb9e36825f59)
 
 2. Login
+![image](https://github.com/user-attachments/assets/2aef6a43-4065-4bee-bda9-8e7d022d91f4)
 
 
 ## Contact
 
 [Ameet Pokhrel] - [pokhrelameet12@gmail.com]
 
-Project Link: [https://github.com/ameetpokhrel02/car-rental-app]
+Project Link: [https://github.com/ameetpokhrel02/Car-Rental-App]
 
         
