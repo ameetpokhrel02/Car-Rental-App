@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:modernloginpage/config/routes.dart';
 import 'package:modernloginpage/screens/auth/login_screen.dart';
-// ignore: unused_import
+// ignore: unused_im
 import 'package:modernloginpage/utils/theme.dart';
 
 void main() {
