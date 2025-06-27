@@ -18,21 +18,31 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeInLeft(
+      duration: const Duration(milliseconds: 800),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(16),
+          color: Colors.white.withOpacity(0.12),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: Colors.white.withOpacity(0.15),
+            width: 1,
+          ),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
         child: TextField(
-          controller: controller,
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontSize: 15,
+          ),
           obscureText: isPassword,
-          style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-            icon: Icon(icon, color: Colors.white),
+            hintStyle: GoogleFonts.poppins(
+              color: Colors.white.withOpacity(0.5),
+              fontSize: 15,
+            ),
+            icon: Icon(icon, color: Colors.white.withOpacity(0.7)),
           ),
         ),
       ),

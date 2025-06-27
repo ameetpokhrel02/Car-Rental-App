@@ -17,21 +17,35 @@ class LoginScreen extends StatelessWidget {
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FadeInDown(
+                    duration: const Duration(milliseconds: 800),
                     child: Text(
                       'Welcome Back',
                       style: GoogleFonts.poppins(
-                        fontSize: 32,
+                        fontSize: 36,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
+                        letterSpacing: 1.2,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 12),
+                  FadeInDown(
+                    delay: const Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: 800),
+                    child: Text(
+                      'Sign in to continue',
+                      style: GoogleFonts.poppins(
+                        fontSize: 16,
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 48),
                   CustomTextField(
                     hintText: 'Email',
                     icon: Icons.email,
@@ -44,9 +58,21 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   FadeInUp(
+                    duration: const Duration(milliseconds: 800),
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue.shade600,
+                        foregroundColor: Colors.white,
+                        elevation: 4,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        textStyle: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
                       onPressed: () {},
-                      child: const Text('Sign In'),
+                      child: const Text('SIGN IN'),
                     ),
                   ),
                   const SizedBox(height: 16),
