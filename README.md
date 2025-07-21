@@ -1,116 +1,46 @@
-      
 # Car Rental App - Modern Login/Signup UI
 
 A modern Flutter application featuring an elegant login and signup interface for a car rental service. The app showcases beautiful animations, glassmorphism effects, and social media integration.
 
 ## Features
 
-- 🎨 Modern UI with glassmorphism effects
-- 🚗 HD car background images
-- ✨ Smooth animations using animate_do
-- 🔐 Login and Signup screens
+- 🎨 Modern UI with glassmorphism effects and gradient overlays
+- 🚗 HD car background images with smooth transitions
+- ✨ Smooth animations using animate_do package
+- 🔐 Secure Login and Signup screens
 - 🌐 Social media login integration (Google, Facebook, Instagram)
-- 📱 Responsive design
-- 🎯 Material 3 design implementation
-- 🔤 Custom Google Fonts (Poppins)
+- 📱 Fully responsive design for all screen sizes
+- 🎯 Material 3 design implementation with custom themes
+- 🔤 Custom Google Fonts (Poppins) integration
+- 🎭 Custom animated backgrounds
+- 🔒 Form validation and error handling
 
 ## Project Structure
 
 ```plaintext
 lib/
 ├── config/
-│   ├── routes.dart
-│   └── constants.dart
+│   ├── routes.dart          # App navigation routes
+│   └── constants.dart        # Global constants and configurations
 ├── screens/
-│   ├── login_screen.dart
-│   └── signup_screen.dart
+│   ├── auth/
+│   │   ├── login_screen.dart    # Login screen implementation
+│   │   └── signup_screen.dart   # Signup screen implementation
+│   └── splash_screen.dart       # Initial loading screen
 ├── widgets/
-│   ├── custom_text_field.dart
-│   ├── social_login_button.dart
-│   └── animated_background.dart
+│   ├── auth/
+│   │   ├── custom_text_field.dart   # Custom input fields
+│   │   └── social_login_button.dart # Social media login buttons
+│   └── common/
+│       └── animated_background.dart # Animated background implementation
 ├── utils/
-│   └── theme.dart
-└── main.dart
+│   └── theme.dart           # Custom theme configurations
+└── main.dart               # App entry point
 
 assets/
+├── animations/            # Lottie animation files
 └── images/
-    └── social/
+    └── social/           # Social media icons
         ├── google.png
         ├── facebook.png
         └── instagram.png
-```
-
-## Getting Started
-
-### Prerequisites
-
-- Flutter SDK (latest version)
-- Dart SDK (latest version)
-- Android Studio / VS Code with Flutter extensions
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone <https://github.com/ameetpokhrel02/Car-Rental-App>
-```
-
-2. Navigate to the project directory:
-```bash
-cd Car-Rental-App
-```
-
-3. Install dependencies:
-```bash
-flutter pub get
-```
-
-4. Run the app:
-```bash
-flutter run
-```
-
-## Dependencies
-
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  google_fonts: ^6.1.0
-  animate_do: ^3.1.2
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Car images sourced from Unsplash
-- Social media icons from respective brand guidelines
-- Flutter community for inspiration and support
-
-## Screenshots
-
-1. Register
-![image](https://github.com/user-attachments/assets/f4877022-66df-482f-a11e-bb9e36825f59)
-
-2. Login
-![image](https://github.com/user-attachments/assets/2aef6a43-4065-4bee-bda9-8e7d022d91f4)
-
-
-## Contact
-
-[Ameet Pokhrel] - [pokhrelameet12@gmail.com]
-
-Project Link: [https://github.com/ameetpokhrel02/Car-Rental-App]
-
-        
