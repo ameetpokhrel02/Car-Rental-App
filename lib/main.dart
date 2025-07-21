@@ -200,7 +200,7 @@ class SignUpPage extends StatelessWidget {
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0), // Reduced vertical padding
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -214,7 +214,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 24), // Reduced from 40
                   FadeInLeft(
                     child: Container(
                       decoration: BoxDecoration(
@@ -252,7 +252,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12), // Reduced from 16
                   FadeInLeft(
                     child: Container(
                       decoration: BoxDecoration(
@@ -272,7 +272,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 16), // Reduced from 24
                   FadeInUp(
                     child: ElevatedButton(
                       onPressed: () {},
