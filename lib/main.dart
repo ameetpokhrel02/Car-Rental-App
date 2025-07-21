@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const InitialSplashScreen(),
+      // Remove the home property
       routes: AppRoutes.routes,
-      initialRoute: '/',
+      initialRoute: '/initial', // Change this to match your routes
     );
   }
 }
