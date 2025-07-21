@@ -110,12 +110,12 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
+// Compare this snippet from home_screen.dart:
   Widget _buildBrandsSection() {
     final brands = [
       {'name': 'BMW', 'logo': 'assets/images/bmw.png'},
-      {'name': 'Toyota', 'logo': 'assets/images/toyota.png'},
-      {'name': 'Mercedes', 'logo': 'assets/images/mercedes.png'},
+      {'name': 'Toyota', 'logo': 'assets/images/Toyota.png'},
+      {'name': 'Mercedes', 'logo': 'assets/images/Mercedes.jpg'},
       {'name': 'Tesla', 'logo': 'assets/images/tesla.png'},
     ];
 
