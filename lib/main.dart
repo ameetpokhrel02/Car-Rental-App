@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: AppRoutes.routes,
-      home: const LoginScreen(),
+      initialRoute: '/',
     );
   }
 }
