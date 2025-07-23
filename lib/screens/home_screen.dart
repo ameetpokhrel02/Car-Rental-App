@@ -1,8 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatelessWidget {
+class Car {
+  final String image;
+  final String name;
+  final double rating;
+  final double price;
+  final List<String> specs;
+  Car(
+      {required this.image,
+      required this.name,
+      required this.rating,
+      required this.price,
+      required this.specs});
+}
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<Car> cars = [
+    Car(
+      image: 'assets/images/hyundai_verna.png',
+      name: 'Hyundai Verna',
+      rating: 4.8,
+      price: 25.00,
+      specs: ['Manual', 'Petrol', '5 Seats'],
+    ),
+    Car(
+      image: 'assets/images/bmw_3series.png',
+      name: 'BMW 3 Series',
+      rating: 4.7,
+      price: 30.00,
+      specs: ['Automatic', 'Petrol', '5 Seats'],
+    ),
+    Car(
+      image: 'assets/images/toyota_camry.png',
+      name: 'Toyota Camry',
+      rating: 4.6,
+      price: 28.00,
+      specs: ['Automatic', 'Hybrid', '5 Seats'],
+    ),
+    Car(
+      image: 'assets/images/tesla.png',
+      name: 'Tesla Model S',
+      rating: 4.9,
+      price: 40.00,
+      specs: ['Automatic', 'Electric', '5 Seats'],
+    ),
+  ];
+
+  int currentCarIndex = 0;
+
+  void _showNextCar() {
+    setState(() {
+      currentCarIndex = (currentCarIndex + 1) % cars.length;
+    });
+  }
+
+  void _showPreviousCar() {
+    setState(() {
+      currentCarIndex = (currentCarIndex - 1 + cars.length) % cars.length;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: 24),
                       _buildBrandsSection(),
                       const SizedBox(height: 24),
-                      _buildPopularCarsSection(),
+                      _buildProminentCarSection(),
                     ],
                   ),
                 ),
@@ -117,7 +181,6 @@ class HomeScreen extends StatelessWidget {
       {'name': 'Toyota', 'logo': 'assets/images/toyota.png'},
       {'name': 'Mercedes', 'logo': 'assets/images/Mercedes.jpg'},
       {'name': 'Tesla', 'logo': 'assets/images/tesla.png'},
-
     ];
 
     return Column(
@@ -178,7 +241,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPopularCarsSection() {
+  Widget _buildProminentCarSection() {
+    final car = cars[currentCarIndex];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -202,12 +266,33 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        _buildCarCard(
-          image: 'assets/images/hyundai_verna.png',
-          name: 'Hyundai Verna',
-          rating: 4.8,
-          price: 25.00,
-          specs: const ['Manual', 'Petrol', '5 Seats'],
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new),
+              onPressed: _showPreviousCar,
+              color: Colors.blue[600],
+              iconSize: 32,
+              tooltip: 'Previous',
+            ),
+            Expanded(
+              child: _buildCarCard(
+                image: car.image,
+                name: car.name,
+                rating: car.rating,
+                price: car.price,
+                specs: car.specs,
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.arrow_forward_ios),
+              onPressed: _showNextCar,
+              color: Colors.blue[600],
+              iconSize: 32,
+              tooltip: 'Next',
+            ),
+          ],
         ),
       ],
     );
@@ -254,11 +339,13 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Image.asset(image, height: 120, width: double.infinity, fit: BoxFit.contain),
+          Image.asset(image,
+              height: 120, width: double.infinity, fit: BoxFit.contain),
           const SizedBox(height: 12),
           Text(
             name,
-            style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500),
+            style:
+                GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.w500),
           ),
           const SizedBox(height: 8),
           Row(
@@ -268,9 +355,11 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Icon(
-                      spec.contains('Manual') ? Icons.settings :
-                      spec.contains('Petrol') ? Icons.local_gas_station :
-                      Icons.event_seat,
+                      spec.contains('Manual')
+                          ? Icons.settings
+                          : spec.contains('Petrol')
+                              ? Icons.local_gas_station
+                              : Icons.event_seat,
                       size: 16,
                       color: Colors.grey[600],
                     ),
