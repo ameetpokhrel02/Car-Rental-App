@@ -55,6 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   int currentCarIndex = 0;
+  String searchQuery = '';
+  List<Car> filteredCars = [];
 
   void _showNextCar() {
     setState(() {
@@ -66,6 +68,30 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       currentCarIndex = (currentCarIndex - 1 + cars.length) % cars.length;
     });
+  }
+
+  void _onSearchChanged(String query) {
+    setState(() {
+      searchQuery = query;
+      if (searchQuery.isEmpty) {
+        filteredCars = [];
+      } else {
+        filteredCars = cars.where((car) {
+          final nameMatch =
+              car.name.toLowerCase().contains(query.toLowerCase());
+          final typeMatch = car.specs
+              .any((spec) => spec.toLowerCase().contains(query.toLowerCase()));
+          return nameMatch || typeMatch;
+        }).toList();
+      }
+    });
+  }
+
+  void _onFilterPressed() {
+    // Placeholder for filter logic
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Filter button pressed!')),
+    );
   }
 
   @override
@@ -84,10 +110,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildSearchBar(),
-                      const SizedBox(height: 24),
-                      _buildBrandsSection(),
-                      const SizedBox(height: 24),
-                      _buildProminentCarSection(),
+                      if (searchQuery.isNotEmpty) ...[
+                        const SizedBox(height: 24),
+                        _buildSearchResultsSection(),
+                      ] else ...[
+                        const SizedBox(height: 24),
+                        _buildBrandsSection(),
+                        const SizedBox(height: 24),
+                        _buildProminentCarSection(),
+                      ],
                     ],
                   ),
                 ),
@@ -154,6 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(width: 8),
           Expanded(
             child: TextField(
+              onChanged: _onSearchChanged,
               decoration: InputDecoration(
                 hintText: 'Search',
                 hintStyle: TextStyle(color: Colors.grey[500]),
@@ -162,16 +194,44 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.blue[600],
-              borderRadius: BorderRadius.circular(8),
+          GestureDetector(
+            onTap: _onFilterPressed,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.blue[600],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(Icons.tune, color: Colors.white, size: 20),
             ),
-            child: const Icon(Icons.tune, color: Colors.white, size: 20),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildSearchResultsSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Search Results',
+          style: GoogleFonts.poppins(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 16),
+        if (filteredCars.isEmpty)
+          const Text('No cars found.', style: TextStyle(color: Colors.grey)),
+        ...filteredCars.map((car) => _buildCarCard(
+              image: car.image,
+              name: car.name,
+              rating: car.rating,
+              price: car.price,
+              specs: car.specs,
+            )),
+      ],
     );
   }
 
