@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'all_brands_screen.dart';
+import 'profile_page.dart';
+import 'favorites_page.dart';
+import 'favorites_page.dart';
 
 class Car {
   final String image;
@@ -57,6 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int currentCarIndex = 0;
   String searchQuery = '';
   List<Car> filteredCars = [];
+  List<Car> favoriteCars = [];
+  int _selectedIndex = 0;
 
   void _showNextCar() {
     setState(() {
@@ -68,6 +74,38 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       currentCarIndex = (currentCarIndex - 1 + cars.length) % cars.length;
     });
+  }
+
+  void _toggleFavorite(Car car) {
+    setState(() {
+      if (favoriteCars.contains(car)) {
+        favoriteCars.remove(car);
+      } else {
+        favoriteCars.add(car);
+      }
+    });
+  }
+
+  void _onNavBarTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    if (index == 4) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ProfilePage(),
+        ),
+      );
+    } else if (index == 2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FavoritesPage(favoriteCars: favoriteCars),
+        ),
+      );
+    }
+    // Add navigation for other tabs if needed
   }
 
   void _onSearchChanged(String query) {
@@ -257,7 +295,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AllBrandsScreen(),
+                  ),
+                );
+              },
               child: Text(
                 'See All',
                 style: TextStyle(color: Colors.blue[600]),
@@ -303,6 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildProminentCarSection() {
     final car = cars[currentCarIndex];
+    final isFavorite = favoriteCars.contains(car);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -343,6 +389,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 rating: car.rating,
                 price: car.price,
                 specs: car.specs,
+                isFavorite: isFavorite,
+                onFavoriteTap: () => _toggleFavorite(car),
               ),
             ),
             IconButton(
@@ -364,6 +412,8 @@ class _HomeScreenState extends State<HomeScreen> {
     required double rating,
     required double price,
     required List<String> specs,
+    bool isFavorite = false,
+    VoidCallback? onFavoriteTap,
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
@@ -395,7 +445,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
-              Icon(Icons.favorite_border, color: Colors.grey[400]),
+              GestureDetector(
+                onTap: onFavoriteTap,
+                child: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite ? Colors.red : Colors.grey[400],
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -419,7 +475,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? Icons.settings
                           : spec.contains('Petrol')
                               ? Icons.local_gas_station
-                              : Icons.event_seat,
+                              : spec.contains('Electric')
+                                  ? Icons.bolt
+                                  : Icons.event_seat,
                       size: 16,
                       color: Colors.grey[600],
                     ),
@@ -437,7 +495,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             children: [
               Text(
-                '\$${price.toStringAsFixed(2)}',
+                ' 24${price.toStringAsFixed(2)}',
                 style: GoogleFonts.poppins(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -468,33 +526,42 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(Icons.home, 'Home', true),
-          _buildNavItem(Icons.explore, 'Explore', false),
-          _buildNavItem(Icons.favorite_border, 'Favorite', false),
-          _buildNavItem(Icons.chat_bubble_outline, 'Chat', false),
-          _buildNavItem(Icons.person_outline, 'Profile', false),
+          _buildNavItem(
+              Icons.home, 'Home', _selectedIndex == 0, () => _onNavBarTap(0)),
+          _buildNavItem(Icons.explore, 'Explore', _selectedIndex == 1,
+              () => _onNavBarTap(1)),
+          _buildNavItem(Icons.favorite, 'Favorite', _selectedIndex == 2,
+              () => _onNavBarTap(2)),
+          _buildNavItem(Icons.chat_bubble_outline, 'Chat', _selectedIndex == 3,
+              () => _onNavBarTap(3)),
+          _buildNavItem(Icons.person_outline, 'Profile', _selectedIndex == 4,
+              () => _onNavBarTap(4)),
         ],
       ),
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, bool isSelected) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          icon,
-          color: isSelected ? Colors.blue[600] : Colors.grey[400],
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
+  Widget _buildNavItem(
+      IconData icon, String label, bool isSelected, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
             color: isSelected ? Colors.blue[600] : Colors.grey[400],
-            fontSize: 12,
           ),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isSelected ? Colors.blue[600] : Colors.grey[400],
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
