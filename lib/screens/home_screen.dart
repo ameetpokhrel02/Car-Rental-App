@@ -4,6 +4,7 @@ import 'all_brands_screen.dart';
 import 'profile_page.dart';
 import 'favorites_page.dart';
 import 'favorites_page.dart';
+import 'chat_screen.dart';
 
 class Car {
   final String image;
