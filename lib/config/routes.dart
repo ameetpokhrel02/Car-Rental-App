@@ -5,7 +5,7 @@ import 'package:modernloginpage/screens/initial_splash_screen.dart';
 import 'package:modernloginpage/screens/splash_screen.dart';
 import  'package:modernloginpage/screens/home_screen.dart';
 
-
+// Define the routes for your app
 class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
     '/initial': (context) => const InitialSplashScreen(),
