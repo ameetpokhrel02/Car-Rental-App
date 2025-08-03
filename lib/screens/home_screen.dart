@@ -104,8 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context) => FavoritesPage(favoriteCars: favoriteCars),
         ),
       );
+    } else if (index == 3) {
+      Navigator.pushNamed(context, '/chat');
     }
-    // Add navigation for other tabs if needed
   }
 
   void _onSearchChanged(String query) {
