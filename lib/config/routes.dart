@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modernloginpage/screens/auth/login_screen.dart';
 import 'package:modernloginpage/screens/auth/signup_screen.dart';
+import 'package:modernloginpage/screens/explore_page.dart';
 import 'package:modernloginpage/screens/favorites_page.dart';
 import 'package:modernloginpage/screens/favorites_screen.dart';
 import 'package:modernloginpage/screens/initial_splash_screen.dart';
@@ -14,6 +15,7 @@ class AppRoutes {
     '/initial': (context) => const InitialSplashScreen(),
     '/home': (context) => const HomeScreen(),  //
     '/favorites': (context) => const FavoritesScreen(),  //
+    '/explore': (context) => const ExplorePage(),
     '/login': (context) => const LoginScreen(),
     '/signup': (context) => const SignUpScreen(),
     '/chat': (context) => const ChatScreen(),

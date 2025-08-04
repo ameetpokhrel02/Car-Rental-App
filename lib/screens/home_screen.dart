@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modernloginpage/screens/explore_page.dart';
 import 'all_brands_screen.dart';
 import 'profile_page.dart';
 import 'favorites_page.dart';
@@ -103,6 +104,13 @@ class _HomeScreenState extends State<HomeScreen> {
         context,
         MaterialPageRoute(
           builder: (context) => FavoritesPage(favoriteCars: favoriteCars),
+        ),
+      );
+    } else if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ExplorePage(),
         ),
       );
     } else if (index == 3) {
