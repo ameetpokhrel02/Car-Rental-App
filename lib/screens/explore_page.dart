@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:modernloginpage/screens/home_screen.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
@@ -194,14 +193,8 @@ class _ExplorePageState extends State<ExplorePage> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                // Inside _buildFeaturedCard() method, update the ElevatedButton:
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
-                    );
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.blue[600],
