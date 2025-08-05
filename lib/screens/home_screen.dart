@@ -100,10 +100,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     } else if (index == 2) {
+      var FavoriteCars;
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => FavoritesPage(favoriteCars: favoriteCars),
+          builder: (context) => FavoritesPage(favoriteCars: FavoriteCars),
         ),
       );
     } else if (index == 3) {
