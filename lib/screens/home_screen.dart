@@ -569,3 +569,224 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+class HomeScreens extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.menu, color: Colors.black),
+          onPressed: () {},
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage('assets/images/profile_avatar.png'),
+            ),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 10),
+              Text('Hello,', style: TextStyle(fontSize: 22, color: Colors.black54)),
+              Text('Adrian', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black)),
+              SizedBox(height: 20),
+              // Search Bar
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'search a vehicle',
+                          border: InputBorder.none,
+                          prefixIcon: Icon(Icons.search, color: Colors.grey),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.tune, color: Colors.grey),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              // Banner Carousel
+              Container(
+                height: 140,
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Image.asset('assets/images/black_car.png', fit: BoxFit.contain),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Enjoy our Nov\nDeals', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                          SizedBox(height: 8),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: Colors.deepPurple,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Text('30% off', style: TextStyle(color: Colors.white)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24),
+              // Our Brands
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Our Brands', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  TextButton(onPressed: () {}, child: Text('See All')),
+                ],
+              ),
+              SizedBox(height: 10),
+              SizedBox(
+                height: 70,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    _brandIcon('assets/images/mercedes.png', 'Mercedes', '+32'),
+                    _brandIcon('assets/images/bmw.png', 'BMW', '+12'),
+                    _brandIcon('assets/images/maserati.png', 'Maserati', '+5'),
+                    _brandIcon('assets/images/porsche.png', 'Porsche', '+8'),
+                  ],
+                ),
+              ),
+              SizedBox(height: 24),
+              // Recommended
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Recommended', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  TextButton(onPressed: () {}, child: Text('See All')),
+                ],
+              ),
+              SizedBox(height: 10),
+              SizedBox(
+                height: 120,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    _recommendedCar('assets/images/red_car.png', 'BMW'),
+                    _recommendedCar('assets/images/grey_car.png', 'Toyota'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color(0xFF3B3B98),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+        ],
+      ),
+    );
+  }
+
+  Widget _brandIcon(String asset, String name, String count) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+        children: [
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 200),
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    blurRadius: 8,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Image.asset(asset, width: 28, height: 28),
+              ),
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(name, style: TextStyle(fontSize: 12)),
+          Text(count, style: TextStyle(fontSize: 10, color: Colors.grey)),
+        ],
+      ),
+    );
+  }
+
+  Widget _recommendedCar(String asset, String brand) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 200),
+          width: 160,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                blurRadius: 8,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(asset, width: 100, height: 60),
+              SizedBox(height: 8),
+              Text(brand, style: TextStyle(fontWeight: FontWeight.bold)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
