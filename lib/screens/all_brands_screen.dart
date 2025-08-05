@@ -7,7 +7,7 @@ class AllBrandsScreen extends StatelessWidget {
     {'name': 'Toyota', 'logo': 'assets/images/toyota.png'},
     {'name': 'Mercedes', 'logo': 'assets/images/Mercedes.jpg'},
     {'name': 'Tesla', 'logo': 'assets/images/tesla.png'},
-    // Add more brands here if needed
+    // Add more brands here if neededs 
   ];
 
   @override
