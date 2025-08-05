@@ -1,4 +1,4 @@
-
+// import the all package
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'all_brands_screen.dart';
